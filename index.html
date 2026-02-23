@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>සෞන්දර්ය B2B Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c8476a;
+    --gold: #d4a04a;
+    --deep: #1a0a14;
+    --cream: #fdf6f0;
+    --blush: #f7e8ef;
+    --text: #2d1a24;
+    --muted: #8a6070;
+    --card: #fff9fc;
+    --border: #e8d0da;
+    --green: #2d7a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--deep);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(200,71,106,0.3);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--rose); font-style: italic; }
+
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    color: #e8d0da;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-btn {
+    background: var(--rose);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: #a83558; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--deep) 0%, #3d0f25 50%, #1a0a14 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(200,71,106,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(212,160,74,0.1) 0%, transparent 60%);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(200,71,106,0.2);
+    border: 1px solid var(--rose);
+    color: var(--rose);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--gold); font-style: italic; }
+
+  .hero p {
+    color: #c9a8b8;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--rose), #a83558);
+    color: white;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 30px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(200,71,106,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(200,71,106,0.5); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.85rem 2rem;
+    border-radius: 30px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--deep); }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.5rem 2rem;
+    background: var(--deep);
+    border-top: 1px solid rgba(200,71,106,0.2);
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* SECTIONS */
+  .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+  .section-title span { color: var(--rose); font-style: italic; }
+  .section-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(200,71,106,0.15);
+    border-color: var(--rose);
+  }
+
+  .product-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--blush), #ffe8f0);
+  }
+
+  .product-body { padding: 1rem; }
+  .product-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .product-supplier { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .product-price { font-weight: 700; color: var(--rose); font-size: 1rem; }
+  .product-moq { font-size: 0.7rem; color: var(--muted); }
+
+  .badge-tag {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--rose);
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* FORMS */
+  .form-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  input, select, textarea {
+    padding: 0.7rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.88rem;
+    background: var(--cream);
+    color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--rose);
+    background: white;
+  }
+  textarea { resize: vertical; min-height: 100px; }
+
+  .submit-btn {
+    background: linear-gradient(135deg, var(--rose), #a83558);
+    color: white;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 30px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 15px rgba(200,71,106,0.3);
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,71,106,0.4); }
+
+  /* ORDERS TABLE */
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .orders-table th {
+    background: var(--deep);
+    color: var(--gold);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .orders-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .orders-table tr:hover td { background: var(--blush); }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .status-pending { background: #fff3cd; color: #856404; }
+  .status-confirmed { background: #d1e7dd; color: #0a3622; }
+  .status-shipped { background: #cfe2ff; color: #084298; }
+  .status-delivered { background: #d4edda; color: var(--green); }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    border: none;
+    background: none;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+  .tab.active { color: var(--rose); border-bottom-color: var(--rose); font-weight: 600; }
+  .tab:hover { color: var(--rose); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* WHATSAPP SECTION */
+  .whatsapp-section {
+    background: linear-gradient(135deg, #128C7E, #075E54);
+    border-radius: 20px;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .wa-icon { font-size: 3rem; }
+  .wa-text h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .wa-text p { font-size: 0.85rem; opacity: 0.85; }
+  .wa-btn {
+    background: white;
+    color: #128C7E;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-left: auto;
+  }
+  .wa-btn:hover { transform: scale(1.03); }
+
+  /* SUPABASE INFO */
+  .supabase-section {
+    background: linear-gradient(135deg, #1C1C1E, #2d2d30);
+    border-radius: 20px;
+    padding: 2rem;
+    color: white;
+    margin-top: 1.5rem;
+    border: 1px solid #3ECF8E33;
+  }
+  .sb-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .sb-icon { font-size: 2rem; }
+  .sb-header h3 { color: #3ECF8E; font-size: 1.1rem; }
+  .sb-info { font-size: 0.82rem; color: #aaa; line-height: 1.8; }
+  .sb-code {
+    background: #0d0d0d;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 0.78rem;
+    color: #3ECF8E;
+    font-family: monospace;
+    margin-top: 0.8rem;
+    overflow-x: auto;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    color: #c9a8b8;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    margin-top: 3rem;
+  }
+  footer strong { color: var(--gold); }
+
+  /* SUCCESS MSG */
+  .success-msg {
+    background: #d1e7dd;
+    color: #0a3622;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    display: none;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .search-bar input {
+    flex: 1;
+    min-width: 200px;
+    border-radius: 30px;
+    padding: 0.7rem 1.2rem;
+  }
+  .search-bar select { border-radius: 30px; }
+  .search-bar button {
+    background: var(--rose);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 30px;
+    font-family: 'Noto Sans Sinhala', sans-serif;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">සෞන්දර්ය <span>Mart</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showTab('products')">නිෂ්පාදන</a></li>
+    <li><a onclick="showTab('suppliers')">සැපයුම්කරුවන්</a></li>
+    <li><a onclick="showTab('orders')">ඇණවුම්</a></li>
+    <li><a onclick="showTab('contact')">සම්බන්ධ වන්න</a></li>
+    <li><a onclick="showTab('integration')">Integration</a></li>
+  </ul>
+  <button class="nav-btn" onclick="showTab('suppliers')">+ ලියාපදිංචි වන්න</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌸 රූපලාවන්‍ය B2B Marketplace</div>
+    <h1>ශ්‍රී ලංකාවේ <span>රූපලාවන්‍ය</span><br>ව්‍යාපාරික වේදිකාව</h1>
+    <p>සැපයුම්කරුවන් හා ව්‍යාපාරිකයන් අතර සේතුව — නිෂ්පාදන, ඇණවුම් සහ ගනුදෙනු සියල්ල එක් තැනකින්</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showTab('products')">🛍️ නිෂ්පාදන බලන්න</button>
+      <button class="btn-outline" onclick="showTab('suppliers')">📝 සැපයුම්කරු ලෙස ලියාපදිංචි වන්න</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">250+</div><div class="stat-label">ලියාපදිංචි සැපයුම්කරුවන්</div></div>
+  <div class="stat"><div class="stat-num">1,800+</div><div class="stat-label">නිෂ්පාදන</div></div>
+  <div class="stat"><div class="stat-num">5,000+</div><div class="stat-label">B2B ගනුදෙනු</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">ගාහකයින් සතුටු</div></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="section">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('products')" id="tab-products">🛍️ නිෂ්පාදන</button>
+    <button class="tab" onclick="showTab('suppliers')" id="tab-suppliers">🏭 සැපයුම්කරු ලියාපදිංචිය</button>
+    <button class="tab" onclick="showTab('orders')" id="tab-orders">📦 ඇණවුම් කළමනාකරණය</button>
+    <button class="tab" onclick="showTab('contact')" id="tab-contact">📞 සම්බන්ධ වන්න</button>
+    <button class="tab" onclick="showTab('integration')" id="tab-integration">⚙️ Integration</button>
+  </div>
+
+  <!-- PRODUCTS TAB -->
+  <div class="tab-content active" id="content-products">
+    <div class="section-title">ජනප්‍රිය <span>නිෂ්පාදන</span></div>
+    <p class="section-sub">හොඳම රූපලාවන්‍ය නිෂ්පාදන Bulk ගණනින් ලබා ගන්න</p>
+
+    <div class="search-bar">
+      <input type="text" placeholder="නිෂ්පාදනය සොයන්න...">
+      <select>
+        <option>සියලු ශ්‍රේණි</option>
+        <option>සම රැකවරණය</option>
+        <option>කෙස් රැකවරණය</option>
+        <option>Make-up</option>
+        <option>සුවඳ</option>
+      </select>
+      <button>සොයන්න</button>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img">🧴</div>
+        <div class="product-body">
+          <div class="badge-tag">සම රැකවරණය</div>
+          <div class="product-name">Vitamin C Face Serum</div>
+          <div class="product-supplier">🏭 NaturalGlow Lanka</div>
+          <div class="product-price">රු. 850 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 50 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">💄</div>
+        <div class="product-body">
+          <div class="badge-tag">Make-up</div>
+          <div class="product-name">Matte Lipstick Collection</div>
+          <div class="product-supplier">🏭 BeautyHub PVT</div>
+          <div class="product-price">රු. 450 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 100 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">🧖</div>
+        <div class="product-body">
+          <div class="badge-tag">කෙස් රැකවරණය</div>
+          <div class="product-name">Coconut Hair Oil</div>
+          <div class="product-supplier">🏭 Ceylon Organic</div>
+          <div class="product-price">රු. 320 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 200 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">🌿</div>
+        <div class="product-body">
+          <div class="badge-tag">සම රැකවරණය</div>
+          <div class="product-name">Aloe Vera Moisturizer</div>
+          <div class="product-supplier">🏭 Green Beauty Co.</div>
+          <div class="product-price">රු. 680 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 75 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">✨</div>
+        <div class="product-body">
+          <div class="badge-tag">Make-up</div>
+          <div class="product-name">Shimmer Highlight Palette</div>
+          <div class="product-supplier">🏭 GlowUp Cosmetics</div>
+          <div class="product-price">රු. 1,200 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 30 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">🌸</div>
+        <div class="product-body">
+          <div class="badge-tag">සුවඳ</div>
+          <div class="product-name">Rose Water Toner</div>
+          <div class="product-supplier">🏭 Floral Essence Ltd</div>
+          <div class="product-price">රු. 290 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 150 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">🧼</div>
+        <div class="product-body">
+          <div class="badge-tag">සම රැකවරණය</div>
+          <div class="product-name">Turmeric Face Wash</div>
+          <div class="product-supplier">🏭 HerbalCraft Lanka</div>
+          <div class="product-price">රු. 380 <small>/unit</small></div>
+          <div class="product-moq">MOQ: 100 units</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">💅</div>
+        <div class="product-body">
+          <div class="badge-tag">Make-up</div>
+          <div class="product-name">Gel Nail Polish Set</div>
+          <div class="product-supplier">🏭 NailArt Studio</div>
+          <div class="product-price">රු. 2,800 <small>/set</small></div>
+          <div class="product-moq">MOQ: 20 sets</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPLIER REGISTRATION TAB -->
+  <div class="tab-content" id="content-suppliers">
+    <div class="section-title">සැපයුම්කරු <span>ලියාපදිංචිය</span></div>
+    <p class="section-sub">ඔබේ රූපලාවන්‍ය ව්‍යාපාරය අපේ platform එකට එකතු කරගන්න</p>
+
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ව්‍යාපාරයේ නම *</label>
+          <input type="text" placeholder="e.g. BeautyGlow (Pvt) Ltd">
+        </div>
+        <div class="form-group">
+          <label>ව්‍යාපාරයේ ලියාපදිංචි අංකය</label>
+          <input type="text" placeholder="PV/00000">
+        </div>
+        <div class="form-group">
+          <label>සම්බන්ධ විය හැකි නම *</label>
+          <input type="text" placeholder="ඔබේ නම">
+        </div>
+        <div class="form-group">
+          <label>ජංගම දුරකථන *</label>
+          <input type="tel" placeholder="07X XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp අංකය</label>
+          <input type="tel" placeholder="07X XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>ඊ-මේල් ලිපිනය</label>
+          <input type="email" placeholder="info@yourbusiness.lk">
+        </div>
+        <div class="form-group">
+          <label>ව්‍යාපාරයේ ශ්‍රේණිය *</label>
+          <select>
+            <option>-- ශ්‍රේණිය තෝරන්න --</option>
+            <option>නිෂ්පාදකයා (Manufacturer)</option>
+            <option>තොග වෙළෙන්දා (Wholesaler)</option>
+            <option>බෙදාහරිනා (Distributor)</option>
+            <option>ආයාතකරු (Importer)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ප්‍රධාන නිෂ්පාදන වර්ග</label>
+          <select>
+            <option>-- ශ්‍රේණිය --</option>
+            <option>සම රැකවරණය</option>
+            <option>කෙස් රැකවරණය</option>
+            <option>Make-up / Cosmetics</option>
+            <option>සුවඳ / Fragrance</option>
+            <option>Organic / Herbal</option>
+            <option>ඉහත සියල්ල</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>ව්‍යාපාරයේ ලිපිනය *</label>
+          <input type="text" placeholder="අංකය, වීදිය, නගරය">
+        </div>
+        <div class="form-group full">
+          <label>ව්‍යාපාරය ගැන කෙටි විස්තරයක් *</label>
+          <textarea placeholder="ඔබේ ව්‍යාපාරය, නිෂ්පාදන, විශේෂතා ගැන ලියන්න..."></textarea>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess('supplier-success')">✅ ලියාපදිංචිය යවන්න</button>
+      <div class="success-msg" id="supplier-success">
+        🎉 ඔබේ ලියාපදිංචිය සාර්ථකව ලැබිණ! අපේ කණ්ඩායම ඔබව 24 පැය ඇතුළත WhatsApp මගින් සම්බන්ධ කරගනු ඇත.
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDERS TAB -->
+  <div class="tab-content" id="content-orders">
+    <div class="section-title">ඇණවුම් <span>කළමනාකරණය</span></div>
+    <p class="section-sub">සියලු B2B ඇණවුම් නිරීක්ෂණය කරන්න</p>
+
+    <div class="form-section" style="margin-bottom:2rem;">
+      <h3 style="margin-bottom:1.2rem; font-size:1rem;">🆕 නව ඇණවුමක් ලබාදෙන්න</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ව්‍යාපාර නාමය *</label>
+          <input type="text" placeholder="ගාහකයාගේ ව්‍යාපාරය">
+        </div>
+        <div class="form-group">
+          <label>දුරකථනය *</label>
+          <input type="tel" placeholder="07X XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>නිෂ්පාදනය *</label>
+          <select>
+            <option>-- නිෂ්පාදනය --</option>
+            <option>Vitamin C Face Serum</option>
+            <option>Matte Lipstick Collection</option>
+            <option>Coconut Hair Oil</option>
+            <option>Aloe Vera Moisturizer</option>
+            <option>Rose Water Toner</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ප්‍රමාණය (units) *</label>
+          <input type="number" placeholder="100" min="1">
+        </div>
+        <div class="form-group full">
+          <label>බෙදාහැරීමේ ලිපිනය</label>
+          <input type="text" placeholder="ලිපිනය">
+        </div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess('order-success')">📦 ඇණවුම ලබාදෙන්න</button>
+      <div class="success-msg" id="order-success">
+        ✅ ඇණවුම සාර්ථකව ලැබිණ! ඔබේ ඇණවුම් අංකය: <strong>#LK-2024-0892</strong>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3 style="margin-bottom:1.2rem; font-size:1rem;">📋 ඇණවුම් ලැයිස්තුව</h3>
+      <div style="overflow-x:auto;">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>ඇණවුම් අංකය</th>
+              <th>ව්‍යාපාරය</th>
+              <th>නිෂ්පාදනය</th>
+              <th>ප්‍රමාණය</th>
+              <th>වටිනාකම</th>
+              <th>තත්ත්වය</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#LK-2024-0891</td>
+              <td>Salon Elegance</td>
+              <td>Vitamin C Serum</td>
+              <td>200 units</td>
+              <td>රු. 170,000</td>
+              <td><span class="status-badge status-delivered">✅ ලැබිණ</span></td>
+            </tr>
+            <tr>
+              <td>#LK-2024-0885</td>
+              <td>Beauty Hub Kandy</td>
+              <td>Matte Lipstick Set</td>
+              <td>500 units</td>
+              <td>රු. 225,000</td>
+              <td><span class="status-badge status-shipped">🚚 යවා ඇත</span></td>
+            </tr>
+            <tr>
+              <td>#LK-2024-0878</td>
+              <td>Glow Spa Galle</td>
+              <td>Coconut Hair Oil</td>
+              <td>300 units</td>
+              <td>රු. 96,000</td>
+              <td><span class="status-badge status-confirmed">✔️ තහවුරු</span></td>
+            </tr>
+            <tr>
+              <td>#LK-2024-0870</td>
+              <td>LuxeBeauty Colombo</td>
+              <td>Aloe Vera Cream</td>
+              <td>150 units</td>
+              <td>රු. 102,000</td>
+              <td><span class="status-badge status-pending">⏳ බලා සිටිති</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT TAB -->
+  <div class="tab-content" id="content-contact">
+    <div class="section-title">අප හා <span>සම්බන්ධ වන්න</span></div>
+    <p class="section-sub">ඕනෑම ප්‍රශ්නයකට අපි සෑම විටම ඔබ සමඟ සිටිමු</p>
+
+    <div class="whatsapp-section" style="margin-bottom:1.5rem;">
+      <div class="wa-icon">💬</div>
+      <div class="wa-text">
+        <h3>WhatsApp මගින් සම්බන්ධ වන්න</h3>
+        <p>ව්‍යාපාරික ගනුදෙනු, ඇණවුම්, සහ සහාය සේවා සඳහා WhatsApp Business ගිණුමෙන් කෙලින්ම message කරන්න</p>
+      </div>
+      <button class="wa-btn" onclick="window.open('https://wa.me/94771234567?text=ආයුබෝවන්! සෞන්දර්‍ය Mart ගැන දැනගන්න ඕනේ','_blank')">
+        📱 WhatsApp Chat
+      </button>
+    </div>
+
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ඔබේ නම *</label>
+          <input type="text" placeholder="ඔබේ නම">
+        </div>
+        <div class="form-group">
+          <label>දුරකථනය *</label>
+          <input type="tel" placeholder="07X XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>ඊ-මේල්</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>ප්‍රශ්නයේ වර්ගය</label>
+          <select>
+            <option>-- තෝරන්න --</option>
+            <option>නිෂ්පාදන ගැන</option>
+            <option>ඇණවුම් ගැන</option>
+            <option>සැපයුම්කරු ලියාපදිංචිය</option>
+            <option>ගෙවීම් ගැන</option>
+            <option>වෙනත්</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>ඔබේ ප්‍රශ්නය *</label>
+          <textarea placeholder="ඔබේ ප්‍රශ්නය හෝ සටහන ලියන්න..."></textarea>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="showSuccess('contact-success')">📩 Message යවන්න</button>
+      <div class="success-msg" id="contact-success">
+        ✅ ඔබේ message ලැබිණ! අපේ කණ්ඩායම ඉක්මනින් ඔබව සම්බන්ධ කරගනු ඇත.
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEGRATION TAB -->
+  <div class="tab-content" id="content-integration">
+    <div class="section-title">Database <span>Integration</span></div>
+    <p class="section-sub">WhatsApp Business API සහ Supabase Database සමඟ connect කරන ආකාරය</p>
+
+    <div class="whatsapp-section">
+      <div class="wa-icon">📱</div>
+      <div class="wa-text">
+        <h3>WhatsApp Business API Integration</h3>
+        <p>ඇණවුම් ලැබෙන සෑම විටම WhatsApp notification ලබාදෙන්න. Twilio හෝ Meta's official API භාවිතා කරන්න.</p>
+      </div>
+    </div>
+
+    <div class="supabase-section">
+      <div class="sb-header">
+        <div class="sb-icon">🗄️</div>
+        <div>
+          <h3>Supabase Database Setup</h3>
+          <div style="color:#888; font-size:0.78rem;">Open Source Firebase Alternative</div>
+        </div>
+      </div>
+      <div class="sb-info">
+        Supabase සමඟ සම්බන්ධ වීමට පහත ගොනු ව්‍යූහය හා code භාවිතා කරන්න:
+      </div>
+      <div class="sb-code">
+// 1. Supabase install කරන්න<br>
+npm install @supabase/supabase-js<br><br>
+
+// 2. supabase.js file එකක් සාදා ගන්න<br>
+import { createClient } from '@supabase/supabase-js'<br><br>
+const supabaseUrl = 'https://YOUR_PROJECT.supabase.co'<br>
+const supabaseKey = 'YOUR_ANON_KEY'<br>
+export const supabase = createClient(supabaseUrl, supabaseKey)<br><br>
+
+// 3. Supplier register කරන්න<br>
+const { data, error } = await supabase<br>
+&nbsp;&nbsp;.from('suppliers')<br>
+&nbsp;&nbsp;.insert([{ name, phone, category, whatsapp }])<br><br>
+
+// 4. Orders table<br>
+const { data } = await supabase<br>
+&nbsp;&nbsp;.from('orders')<br>
+&nbsp;&nbsp;.select('*')<br>
+&nbsp;&nbsp;.order('created_at', { ascending: false })
+      </div>
+    </div>
+
+    <div class="form-section" style="margin-top:1.5rem;">
+      <h3 style="margin-bottom:1rem;">📊 Supabase Tables ව්‍යූහය</h3>
+      <div style="overflow-x:auto;">
+        <table class="orders-table">
+          <thead>
+            <tr><th>Table</th><th>Columns</th><th>භාවිතය</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>suppliers</strong></td><td>id, name, phone, whatsapp, category, address, created_at</td><td>සැපයුම්කරුවන් ගබඩා කරන්න</td></tr>
+            <tr><td><strong>products</strong></td><td>id, supplier_id, name, price, moq, category, stock</td><td>නිෂ්පාදන catalog</td></tr>
+            <tr><td><strong>orders</strong></td><td>id, buyer_name, phone, product_id, qty, status, total</td><td>ඇණවුම් කළමනාකරණය</td></tr>
+            <tr><td><strong>contacts</strong></td><td>id, name, phone, message, type, created_at</td><td>සම්බන්ධ ඉල්ලීම්</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 <strong>සෞන්දර්ය Mart</strong> — ශ්‍රී ලංකාවේ රූපලාවන්‍ය B2B Marketplace</p>
+  <p style="margin-top:0.4rem; opacity:0.6;">Supabase + WhatsApp Business API Powered</p>
+</footer>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('content-' + tab).classList.add('active');
+}
+
+function showSuccess(id) {
+  const msg = document.getElementById(id);
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 5000);
+}
+</script>
+</body>
+</html>
